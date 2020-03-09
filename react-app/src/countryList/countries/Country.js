@@ -3,17 +3,17 @@ import './Country.sass';
 
 const Country = (props) => {
 	return(
-		<div className="country row">
-			<div className="col-3">
+		<tr>
+			<td>
 				{props.country.id}
-			</div>
-			<div className="col-6">
+			</td>
+			<td>
 				{props.country.name}
-			</div>
-			<div className="col-3">
-				{props.country.id?<button onClick={()=>{props.deleteCountry(props.id, props.country)}}>Borrar</button>:<i className="fas fa-clock"></i>}
-			</div>
-		</div>
+			</td>
+			<td>
+				{props.country.id?<button className='btn btn-danger' onClick={()=>{props.deleteCountry(props.id, props.country)}}>Borrar</button>:<i className="fas fa-clock"></i>}
+			</td>
+		</tr>
 	);
 }
 

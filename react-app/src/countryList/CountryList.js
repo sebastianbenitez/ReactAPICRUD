@@ -12,9 +12,18 @@ const CountryList = (props) => {
 	});
 
 	return(
-		<div className='container'>
-			{CountryList}
-		</div>
+		<table className='table'>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Descripcion</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{CountryList}
+			</tbody>
+		</table>
 	);
 }
 
