@@ -1,0 +1,14 @@
+.pais {
+  color: #888;
+  text-align: left;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee; }
+  .pais button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 31.25%;
+    padding: 0.25rem;
+    margin: 0.5rem; }
+
+/*# sourceMappingURL=Tarea.css.map */

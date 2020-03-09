@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CountryList from './countryList/CountryList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+	state = { 
+		countries: [
+		  {
+		  	'id':0,
+		  	'name': 'Cargando Paises'
+		  }
+		]
+	};
+
+	handleDeleteCountry = async (index, country) => {
+
+		const remainingCountries = this.state.countries;
+		remainingCountries.splice(index, 1);
+
+		this.setState({countries: remainingCountries});
+	}
+
+	async componentDidMount() {
+		const response = await fetch('http://localhost:5000/api/country/');
+		const json = await response.json();
+
+		//let countriesJson = json.map(c => c.name);
+		this.setState({countries: json});
+	}
+	render() {
+		return (
+			<div className="card text-center">
+				<div className="card-body">
+					<CountryList 
+						countries={this.state.countries}
+						deleteCountry={this.handleDeleteCountry}/>
+				</div>
+			</div>
+		);	
+	}
 }
 
 export default App;
