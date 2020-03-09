@@ -11,7 +11,7 @@ const Country = (props) => {
 				{props.country.name}
 			</div>
 			<div className="col-3">
-				<button onClick={()=>{props.deleteCountry(props.id, props.country)}}>Borrar</button>
+				{props.country.id?<button onClick={()=>{props.deleteCountry(props.id, props.country)}}>Borrar</button>:<i className="fas fa-clock"></i>}
 			</div>
 		</div>
 	);

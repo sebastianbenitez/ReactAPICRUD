@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './App.css';
 import CountryList from './countryList/CountryList';
 
@@ -7,26 +8,46 @@ class App extends React.Component {
 	state = { 
 		countries: [
 		  {
-		  	'id':0,
+		  	'id':'',
 		  	'name': 'Cargando Paises'
 		  }
 		]
 	};
 
 	handleDeleteCountry = async (index, country) => {
+		axios.delete('http://localhost:5000/api/country/',{data: country})
+		.then(res => {
+			alert(res.data);
+			
+			const remainingCountries = this.state.countries;
+			remainingCountries.splice(index, 1);
 
-		const remainingCountries = this.state.countries;
-		remainingCountries.splice(index, 1);
-
-		this.setState({countries: remainingCountries});
+			this.setState({countries: remainingCountries});
+		})
+		.catch(err=>{
+			alert('Ocurrio un error en la base de datos');
+			console.log(err);
+		});
 	}
 
 	async componentDidMount() {
-		const response = await fetch('http://localhost:5000/api/country/');
-		const json = await response.json();
+		axios.get('http://localhost:5000/api/country/')
+		.then(res => {
+			const countriesJson = res.data;
+			this.setState({countries: countriesJson});
+		})
+		.catch(err => {
+			this.setState({ 
+				countries: [
+				  {
+				  	'id':'',
+				  	'name': 'Ocurrio un error en la base de datos'
+				  }
+				]
+			});
+			console.log(err);
+		});
 
-		//let countriesJson = json.map(c => c.name);
-		this.setState({countries: json});
 	}
 	render() {
 		return (

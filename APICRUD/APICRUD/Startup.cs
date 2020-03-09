@@ -38,6 +38,8 @@ namespace APICRUD
             app.UseCors(c =>
             {
                 c.AllowAnyOrigin();
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
             });
 
             app.UseAuthorization();
